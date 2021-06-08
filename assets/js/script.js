@@ -62,7 +62,7 @@ function setUVIndex (data) {
     }
     
 }
-
+// Function to display and populate the forecast cards
 function setFiveDayForecast (data) {
     forecastHeader.classList.remove('d-none');
     for (i = 0; i <fiveDayForecast.length; i++) {
@@ -98,7 +98,7 @@ function listSearchHistory() {
         })
     }
 }
-
+// Function to load Recent Searches on startup
 function init() {
     listSearchHistory();
 }
