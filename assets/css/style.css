@@ -3,6 +3,6 @@ header {
     background-image: linear-gradient(to right, blue, indigo);
 }
 
-#forecast {
+.forecast {
     background-color: darkblue;
 }

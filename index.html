@@ -23,14 +23,15 @@
                 <h5 class="mt-1">Search For A City:</h5>
                 <div class="input-group mb-3">
                     <input id="citySelected" type="text" class="form-control" placeholder="Enter A City" aria-label="Enter A City">
-                    <div class="input-group-append">
+                    <div class="input-group-button">
                         <button class="btn btn-primary" type="button" id="searchBtn">
                             <i class="fas fa-search"></i> 
                         </button>
                     </div>
                 </div>
+                <!-- Recent Searches -->
                 <button class="btn btn-danger" type="button" id="clearBtn">Clear Recent Searches</button>
-                <form id="history"></form>
+                <form id='history'></form>
             </div>
             <!-- Today's Forecast Card -->
             <div class="col-lg-9">
@@ -58,6 +59,8 @@
                     <div class="col-md2 forecast text-white m-2 rounded"></div>
                     <div class="col-md2 forecast text-white m-2 rounded"></div>
                     <div class="col-md2 forecast text-white m-2 rounded"></div>
+                    <div class="col-md2 forecast text-white m-2 rounded"></div>
+
                 </div>
             </div>
         </div>
