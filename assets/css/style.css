@@ -1,5 +1,6 @@
 header {
     font-size: x-large;
+    background-image: linear-gradient(to right, blue, indigo);
 }
 
 #forecast {
