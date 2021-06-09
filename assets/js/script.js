@@ -7,7 +7,7 @@ var currentWind = document.getElementById('wind-speed');
 var currentHumidity = document.getElementById('humidity');
 var currentUV = document.getElementById('UV-index');
 var searchHistory = JSON.parse(localStorage.getItem('search')) || [];
-var history = document.getElementById('history');
+var recentHistory = document.getElementById('history');
 var forecastHeader = document.getElementById('fiveDayForecast-header');
 var fiveDayForecast = document.querySelectorAll('.forecast');
 
@@ -65,27 +65,27 @@ function setUVIndex (data) {
 // Function to display and populate the forecast cards
 function setFiveDayForecast (data) {
     forecastHeader.classList.remove('d-none');
-    for (i = 1; i <fiveDayForecast.length; i++) {
+    for (i = 0; i <fiveDayForecast.length; i++) {
         fiveDayForecast[i].innerHTML = '';
-        var forecastDate = new Date(data.daily[i].dt * 1000);
+        var forecastDate = new Date(data.daily[i+1].dt * 1000);
         var day = forecastDate.getDate();
         var month = forecastDate.getMonth() + 1;
         var year = forecastDate.getFullYear();
         var dailyDate = document.createElement('h3')
         dailyDate.innerHTML =  month + "/" + day + "/" + year;
         fiveDayForecast[i].appendChild(dailyDate);
-        var weatherIcon = data.daily[i].weather[0].icon;
+        var weatherIcon = data.daily[i+1].weather[0].icon;
         var forecastIcon = document.createElement('img');
         forecastIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
         fiveDayForecast[i].appendChild(forecastIcon);
         var forecastTemp = document.createElement('p');
-        forecastTemp.innerHTML = "Temperature: " + data.daily[i].temp.day + "&#8457";
+        forecastTemp.innerHTML = "Temperature: " + data.daily[i+1].temp.day + "&#8457";
         fiveDayForecast[i].appendChild(forecastTemp);
         var forecastWind = document.createElement('p');
-        forecastWind.innerHTML = "Wind Speed: " + data.daily[i].wind_speed +" MPH";
+        forecastWind.innerHTML = "Wind Speed: " + data.daily[i+1].wind_speed +" MPH";
         fiveDayForecast[i].appendChild(forecastWind);
         var forecastHumidity = document.createElement('p');
-        forecastHumidity.innerHTML = "Humidity: " + data.daily[i].humidity + "%";
+        forecastHumidity.innerHTML = "Humidity: " + data.daily[i+1].humidity + "%";
         fiveDayForecast[i].appendChild(forecastHumidity);
         }
 
@@ -93,16 +93,16 @@ function setFiveDayForecast (data) {
 }
 // Function to list Recent Searches
 function listSearchHistory() {
+    recentHistory.innerHTML = '';
     for (let i = 0; i < searchHistory.length; i++) {
-        var recentCity = document.createElement('input');
-        recentCity.setAttribute('type', 'text');
-        recentCity.setAttribute('class', 'form-control d-block bg-grey');
-        recentCity.setAttribute('readonly', true);
+        var recentCity = document.createElement('button');
+        recentCity.setAttribute('class', 'row text-center d-block btn btn-secondary mb-2 btn-block');
         recentCity.setAttribute('value', searchHistory[i]);
+        recentCity.innerText = recentCity.value;
         recentCity.addEventListener('click', function () {
-            getCoords(recentCity.value);
+            getCoords(this.value);
         })
-        history.appendChild(recentCity);
+        recentHistory.appendChild(recentCity);
     }
 }
 // Function to load Recent Searches on startup
@@ -116,6 +116,7 @@ $('#searchBtn').click(function () {
     getCoords(city);
     searchHistory.push(city);
     localStorage.setItem("search", JSON.stringify(searchHistory))
+    listSearchHistory();
 })
 // Event Handler for 'Clear Recent Searches' Button
 $('#clearBtn').click(function () {
