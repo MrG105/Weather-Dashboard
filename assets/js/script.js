@@ -14,7 +14,7 @@ var fiveDayForecast = document.querySelectorAll('.forecast');
 
 // Function to search weather by city and update card with response data
 function getCoords(city) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + APIKey
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + APIKey
     fetch(queryURL) 
     .then(function (response1) {
         return response1.json();
