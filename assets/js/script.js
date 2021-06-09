@@ -125,4 +125,5 @@ $('#clearBtn').click(function () {
     listSearchHistory();
 })
 
+// runs on page start
 init();
